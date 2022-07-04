@@ -2,24 +2,24 @@ const Film = require('../Models/film.model');
 
 // Create Film
 exports.createFilm = async (req, res) => {
-  console.log(req.body.filmData)
+  console.log(req.body, req.file)
   try {
     // console.log((req.file.path.split("\\").pop()))
     const film = await new Film({
-      name: req.body.filmData.name,
-      description: req.body.filmData.description,
-      release_date: req.body.filmData.release_date,
-      rating: req.body.filmData.rating,
-      ticket_price: req.body.filmData.ticket_price,
-      country: req.body.filmData.country,
-      genre: req.body.filmData.genre,
+      name: req.body.name,
+      description: req.body.description,
+      release_date: req.body.release_date,
+      rating: req.body.rating,
+      ticket_price: req.body.ticket_price,
+      country: req.body.country,
+      genre: req.body.genre,
       photo: req.file.path.split("\\").pop(),
     }).save();
 
     return res.status(200).json({ message: 'Film Created', film });
   }
   catch (error) {
-    return res.status(401).json({
+    return res.status(400).json({
       message: 'Error at Create Film !',
       error: error,
     })
@@ -38,7 +38,7 @@ exports.showAllFilms = async (req, res) => {
     }
   }
   catch (error) {
-    return res.status(401).json({
+    return res.status(400).json({
       message: 'Error at Show All Films !',
       error: error,
     })
@@ -58,7 +58,7 @@ exports.findByName = async (req, res) => {
     }
   }
   catch (error) {
-    return res.status(401).json({
+    return res.status(400).json({
       message: 'Error at Find Film By Name !',
       error: error,
     })
