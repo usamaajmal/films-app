@@ -5,6 +5,8 @@ let bodyParser = require('body-parser');
 let cors = require('cors');
 
 const userRoutes = require('./Routes/user.routes')
+const filmRoutes = require('./Routes/film.routes')
+const commentRoutes = require('./Routes/comments.routes')
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,6 +19,8 @@ app.use(cors());
 
 // All Routes
 app.use(userRoutes)
+app.use(filmRoutes)
+app.use(commentRoutes)
 
 // Database Connection
 mongoose.connect('mongodb://127.0.0.1:27017/films', {
